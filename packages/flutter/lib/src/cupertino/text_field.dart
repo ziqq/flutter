@@ -235,6 +235,7 @@ class CupertinoTextField extends StatefulWidget {
     this.prefixMode = OverlayVisibilityMode.always,
     this.suffix,
     this.suffixMode = OverlayVisibilityMode.always,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.clearButtonMode = OverlayVisibilityMode.never,
     this.clearButtonSemanticLabel,
     TextInputType? keyboardType,
@@ -362,6 +363,7 @@ class CupertinoTextField extends StatefulWidget {
     this.prefixMode = OverlayVisibilityMode.always,
     this.suffix,
     this.suffixMode = OverlayVisibilityMode.always,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.clearButtonMode = OverlayVisibilityMode.never,
     this.clearButtonSemanticLabel,
     TextInputType? keyboardType,
@@ -507,6 +509,13 @@ class CupertinoTextField extends StatefulWidget {
   ///
   /// Has no effect when [suffix] is null.
   final OverlayVisibilityMode suffixMode;
+
+  /// Controls the vertical aligment of the [suffix] and the [prefix] widget in relation to content.
+  ///
+  /// Defaults to [CrossAxisAlignment.center].
+  ///
+  /// Has no effect when the [suffix] and the [prefix] is null.
+  final CrossAxisAlignment crossAxisAlignment;
 
   /// Show an iOS-style clear button to clear the current text entry.
   ///
@@ -1205,7 +1214,9 @@ class _CupertinoTextFieldState extends State<CupertinoTextField> with Restoratio
           (true, true) => widget.suffix ?? _buildClearButton(),
           (false, true) => _buildClearButton(),
         };
-        return Row(children: <Widget>[
+        return Row(
+          crossAxisAlignment: widget.crossAxisAlignment,
+          children: <Widget>[
           // Insert a prefix at the front if the prefix visibility mode matches
           // the current text state.
           if (prefixWidget != null) prefixWidget,
